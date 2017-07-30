@@ -43,4 +43,10 @@ export default class Action {
   _restartCooldown() {
 
   }
+
+  // STATIC
+
+  static get(name){
+    return actions.get(name)
+  }
 }

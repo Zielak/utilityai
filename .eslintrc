@@ -18,7 +18,8 @@
     ],
     "quotes": [
       "error",
-      "single"
+      "single",
+      {"allowTemplateLiterals": true}
     ],
     // "no-console": "off",
     "semi": [

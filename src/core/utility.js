@@ -1,5 +1,11 @@
 import Maths from '../maths'
 
+/**
+ * This class represents the utility of given behavior, option or consideration
+ * 
+ * @export
+ * @class Utility
+ */
 export default class Utility {
 
   constructor({value, weight = 1}) {
