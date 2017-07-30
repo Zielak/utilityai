@@ -1,2 +1,7 @@
 export {default as Action} from './action'
 export {default as Agent} from './agent'
+export {default as Behaviour} from './behaviour'
+export {default as Consideration} from './consideration'
+export {default as Option} from './option'
+export {default as Selector} from './selector'
+export {default as Utility} from './utility'

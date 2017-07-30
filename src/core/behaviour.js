@@ -1,9 +1,8 @@
-import Selector from './selector'
 import Option from './option'
 
 export default class Behaviour {
   
-  constructor({uniqueName, selector, options = null}){
+  constructor({uniqueName, selector = , options = null}){
     if(options.has(uniqueName)){
       throw `Behaviour called '${uniqueName} already exists`
     }
@@ -17,8 +16,16 @@ export default class Behaviour {
     this.options = options || new Map()
   }
 
+  /**
+   * Add an option to this Behaviour
+   * 
+   * @param {string|Option} option name of the option OR reference to option object
+   * @memberof Behaviour
+   */
   addOption(option){
-    // TODO: add option by their uniqueName
+    if(typeof option === 'string'){
+      option = Option.get(option)
+    }
     if(this.considerations.has(option.uniqueName)){
       throw `This behaviour already has '${option.uniqueName}' option`
     }
@@ -29,7 +36,7 @@ export default class Behaviour {
     return this._selector
   }
   set selector(v){
-    this._selector = v instanceof Selector ? v : this._selector
+    this._selector = typeof v === 'function' ? v : this._selector
   }
 
   /**

@@ -5,20 +5,20 @@ export default class Timer {
   /**
    * Creates an instance of Timer.
    * @param {object} params
-   * @param {number} params.time time after which this timer should finish
-   * @param {boolean} params.running jump-start this timer immediatelly?
-   * @param {boolean} params.repeat should this timer run continuously?
-   * @param {function} params.onFinished function to be run after this timer is done
+   * @param {number} [params.time=0] time after which this timer should finish
+   * @param {boolean} [params.running=true] jump-start this timer immediatelly?
+   * @param {boolean} [params.repeat=false] should this timer run continuously?
+   * @param {function(passedTime:number, timer:Timer)} [params.onFinished=null] function to be run after this timer is done. It'll contain `passedTime` and a reference to this timer in `timer`
    * @memberof Timer
    */
-  constructor({time = 0, running = true, repeat = false, onFinished = null}) {
+  constructor({ time = 0, running = true, repeat = false, onFinished = null }) {
     this._counter = 0
 
     this.time = time
     this.repeat = repeat
     this.onFinished = onFinished
     this.running = running
-    
+
     this.finished = false
     _timers.push(this)
   }
@@ -33,38 +33,71 @@ export default class Timer {
       this.running = false
       _timers.splice(_timers.indexOf(this), 1)
     }
+    return this
+  }
+
+  /**
+   * Pauses this timer
+   * 
+   * @returns {Timer} this timer, for chaining
+   * @memberof Timer
+   */
+  pause() {
+    this.running = false
+    return this
+  }
+
+  /**
+   * Resums this timer
+   * 
+   * @returns {Timer} this timer, for chaining
+   * @memberof Timer
+   */
+  resume() {
+    this.running = true
+    return this
   }
 
   /**
    * Reset this timer back to zero.
    * 
+   * @returns {Timer} this timer, for chaining
    * @memberof Timer
    */
   reset() {
     this._counter = 0
     this.running = true
     this.finished = false
+    return this
   }
 
   // PRIVATE
 
+  /**
+   * Updates this timer with delta
+   * It will run `onFinished` with passed time in parameter.
+   * (time passed can be higher than desired time)
+   * 
+   * @param {any} dt 
+   * @memberof Timer
+   */
   _update(dt) {
     if (this.running) {
       this._counter += dt
       if (this._counter >= this.time) {
-        this._finish()
+        this._finish(this._counter)
       }
-      if(this.repeat){
+      if (this.repeat) {
         this.reset()
       }
     }
   }
 
-  _finish() {
+  _finish(timePassed) {
     this.running = false
     this.finished = true
-    if(this.onFinished !== null){
-      this.onFinished()
+    if (this.onFinished !== null && typeof this.onFinished === 'function') {
+      this.onFinished(timePassed)
     }
   }
 
@@ -95,8 +128,8 @@ export default class Timer {
    * @returns {Timer}
    * @memberof Timer
    */
-  static delay({time = 0, repeat = false, onFinished = null}) {
-    return new Timer({time, repeat, onFinished})
+  static delay({ time = 0, repeat = false, onFinished = null }) {
+    return new Timer({ time, repeat, onFinished })
   }
 
   /**

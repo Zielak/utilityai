@@ -4,13 +4,14 @@
   "description": "Utility AI library for JS",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava",
     "docs": "esdoc",
     "postinstall": "npm run docs"
   },
   "author": "Darek Greenly",
   "license": "ISC",
   "devDependencies": {
+    "ava": "^0.21.0",
     "esdoc": "^1.0.1",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.3.0",

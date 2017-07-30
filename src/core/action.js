@@ -23,6 +23,7 @@ export default class Action {
     return !this._cooldown.finished
   }
 
+  
   update(context, dt) {
     this.onUpdate(context, dt)
   }
