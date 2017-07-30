@@ -4,10 +4,11 @@ const _timers = []
 export default class Timer {
   /**
    * Creates an instance of Timer.
-   * @param {number} time time after which this timer should finish
-   * @param {boolean} running jump-start this timer immediatelly?
-   * @param {boolean} repeat should this timer run continuously?
-   * @param {function} onFinished function to be run after this timer is done
+   * @param {object} params
+   * @param {number} params.time time after which this timer should finish
+   * @param {boolean} params.running jump-start this timer immediatelly?
+   * @param {boolean} params.repeat should this timer run continuously?
+   * @param {function} params.onFinished function to be run after this timer is done
    * @memberof Timer
    */
   constructor({time = 0, running = true, repeat = false, onFinished = null}) {
@@ -86,9 +87,12 @@ export default class Timer {
    * Factory for new Timer instance
    * 
    * @static
-   * @param {number} time 
-   * @param {Function} fun function to call after timer is finished
-   * @returns 
+   * @param {object} params
+   * @param {number} params.time time after which this timer should finish
+   * @param {boolean} params.running jump-start this timer immediatelly?
+   * @param {boolean} params.repeat should this timer run continuously?
+   * @param {function} params.onFinished function to be run after this timer is done
+   * @returns {Timer}
    * @memberof Timer
    */
   static delay({time = 0, repeat = false, onFinished = null}) {
