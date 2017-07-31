@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "ava",
+    "test:watch": "ava --watch",
     "docs": "esdoc",
     "postinstall": "npm run docs"
   },
@@ -12,11 +13,20 @@
   "license": "ISC",
   "devDependencies": {
     "ava": "^0.21.0",
+    "babel": "^6.23.0",
+    "babel-register": "^6.24.1",
     "esdoc": "^1.0.1",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.3.0",
+    "nyc": "^11.1.0",
     "uuid": "^3.1.0",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
   }
 }
