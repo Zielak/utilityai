@@ -49,17 +49,10 @@ export default class Action {
 
   
   update(context, dt) {
-    this.onUpdate(context, dt)
+    if(this.status === Action.RUNNING){
+      this.onUpdate(context, dt)
+    }
   }
-
-  /**
-   * Override this to keep updating an action with desired delta and context
-   * 
-   * @param {any} context 
-   * @param {number} dt 
-   * @memberof Action
-   */
-  onUpdate(context, dt) {}
 
   execute(context) {
     if(this.inCooldown){
@@ -71,17 +64,75 @@ export default class Action {
     }
     return this.status
   }
+
+  /**
+   * Ends running this action with a failure
+   * 
+   * @param {any} context 
+   * @memberof Action
+   */
+  fail(context) {
+    this.status = Action.FAILURE
+    this.onFailure(context)
+    this.onEnded(context)
+  }
+
+  /**
+   * End this action with successful result
+   * 
+   * @param {any} context 
+   * @memberof Action
+   */
+  succeed(context) {
+    this.status = Action.SUCCESS
+    this.onSuccess(context)
+    this.onEnded(context)
+  }
+
+  // OVERRIDEES
+
+  /**
+   * Executes on every update untill this action ends with SUCCESS or FAILURE
+   * 
+   * @param {any} context 
+   * @param {number} dt 
+   * @memberof Action
+   */
+  onUpdate(context, dt) {}
+
+  /**
+   * Executes right after execution
+   * 
+   * @param {any} context 
+   * @memberof Action
+   */
   onExecute(context) {}
 
-  fail(context) {
-    this.onFailure(context)
-  }
+  /**
+   * Executes once this action will end successfully
+   * 
+   * @param {any} context 
+   * @memberof Action
+   */
+  onSuccess(context) {}
+
+  /**
+   * Executes once this action ends with a failure
+   * 
+   * @param {any} context 
+   * @memberof Action
+   */
   onFailure(context) {}
 
-  succeed(context) {
-    this.onSuccess(context)
-  }
-  onSuccess(context) {}
+  /**
+   * Runs after ending this action with FAILURE or SUCCESS
+   * 
+   * @param {any} context 
+   * @memberof Action
+   */
+  onEnded(context) {}
+
+  // PRIVATE
 
   _restartCooldown() {
 

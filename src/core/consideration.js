@@ -6,6 +6,7 @@ export default class Consideration {
     this.uniqueName = uniqueName
     this.weight = weight
     this.utility
+    // TODO: did I miss something?
   }
 
   get weight(){
