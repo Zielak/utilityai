@@ -20,6 +20,7 @@ export default class Agent {
           this.decisionUpdateRateMin,
           this.decisionUpdateRateMax
         )
+        this.update(passedTime)
       }
     })
   }

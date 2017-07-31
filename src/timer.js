@@ -71,6 +71,16 @@ export default class Timer {
     return this
   }
 
+  /**
+   * How much time has passed since this timer begun
+   * 
+   * @readonly
+   * @memberof Timer
+   */
+  get elapsed(){
+    return this._counter
+  }
+
   // PRIVATE
 
   /**

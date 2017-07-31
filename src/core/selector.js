@@ -2,18 +2,18 @@
 export default class Selector {
 
   /**
-   * Override this.
-   * TODO: Does it need to be a class?
+   * Override this and call `super.select(utilities)`.
+   * This function will
    * 
-   * @param {any} utilities 
+   * @param {Map<Utility>} utilities 
    * @memberof Selector
    */
   select(utilities){
     // Fail when there's no utilities
-    if(utilities.size === 0) return -1
+    if(utilities.size === 0) return null
     
     // Pick first if it has only one utiliy
-    if(utilities.size === 1) return 0
+    if(utilities.size === 1) return utilities.keys[0]
   }
 
 }
