@@ -1,3 +1,4 @@
-export * from '../src/index'
+export { default as CharacterContext } from './characterContext'
 import './constructor'
+
 

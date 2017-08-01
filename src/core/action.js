@@ -5,7 +5,7 @@ const actions = new Map()
 
 export default class Action {
 
-  constructor({name, cooldown = 3000}){
+  constructor({name, cooldown = 1000}){
     // Check uniqueness
     if(actions.has(name)){
       throw `Action '${name} already exists`

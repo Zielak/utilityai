@@ -7,7 +7,7 @@ import Selector from '../core/selector'
  * @param {Map<Utilitiy>} utilities 
  * @returns {string} name of the best choice
  */
-export default class RandomSelector extends Selector {
+export default class RandomUtilitySelector extends Selector {
 
   select(utilities) {
     super.select(utilities)
