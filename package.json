@@ -13,7 +13,6 @@
   "license": "ISC",
   "devDependencies": {
     "ava": "^0.21.0",
-    "babel": "^6.23.0",
     "babel-register": "^6.24.1",
     "esdoc": "^1.0.1",
     "esdoc-standard-plugin": "^1.0.0",
