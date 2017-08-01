@@ -4,12 +4,12 @@ import Selector from './selector'
 
 export default class Behaviour {
   
-  constructor({uniqueName, selector, options = null}){
-    if(options.has(uniqueName)){
-      throw `Behaviour called '${uniqueName} already exists`
+  constructor({name, selector, options = null}){
+    if(options.has(name)){
+      throw `Behaviour called '${name} already exists`
     }
 
-    this.uniqueName = uniqueName
+    this.name = name
 
     this._selector = selector || new MaxUtilitySelector()
 
@@ -29,10 +29,10 @@ export default class Behaviour {
     if(!option){
       throw `You probably didn't specify an option: ${option}`
     }
-    if(this.considerations.has(option.uniqueName)){
-      throw `This behaviour already has '${option.uniqueName}' option`
+    if(this.considerations.has(option.name)){
+      throw `This behaviour already has '${option.name}' option`
     }
-    this.options.set(option.uniqueName, option)
+    this.options.set(option.name, option)
   }
 
   get selector() {
@@ -53,7 +53,7 @@ export default class Behaviour {
     // Get each options's all utilities
     const utilities = new Map()
     this.options.forEach(el => {
-      utilities.set(el.uniqueName, el.consider(context))
+      utilities.set(el.name, el.consider(context))
     })
     
     // Score those utilities using our selector

@@ -25,10 +25,16 @@ export default class Agent {
     })
   }
 
+  /**
+   * Get currently running action or `null`
+   * 
+   * @readonly
+   * @memberof Agent
+   */
   get currentAction() {
     return this._currentAction
   }
 
-  update()
+  update() { }
 
 }

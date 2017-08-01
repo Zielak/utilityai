@@ -5,7 +5,7 @@ import Selector from '../core/selector'
  * 
  * @export
  * @param {Map<Utilitiy>} utilities 
- * @returns {string} uniqueName of the best choice
+ * @returns {string} name of the best choice
  */
 export default class RandomSelector extends Selector {
 

@@ -5,14 +5,14 @@ const actions = new Map()
 
 export default class Action {
 
-  constructor({uniqueName, cooldown}){
+  constructor({name, cooldown = 3000}){
     // Check uniqueness
-    if(actions.has(uniqueName)){
-      throw `Action '${uniqueName} already exists`
+    if(actions.has(name)){
+      throw `Action '${name} already exists`
     }
 
-    this.uniqueName = uniqueName
-    actions.set(this.uniqueName, this)
+    this.name = name
+    actions.set(this.name, this)
 
     this.startedTime = now()
     this.status = Action.IDLE
@@ -47,7 +47,6 @@ export default class Action {
     }
   }
 
-  
   update(context, dt) {
     if(this.status === Action.RUNNING){
       this.onUpdate(context, dt)

@@ -1,14 +1,16 @@
+import Consideration from './consideration'
 
 const options = new Map()
 
 export default class Option {
 
-  constructor({ uniqueName, action = null }) {
-    if (options.has(uniqueName)) {
-      throw `Option called '${uniqueName} already exists`
+  constructor({ name, action = null }) {
+    if (options.has(name)) {
+      throw `Option called '${name} already exists`
     }
 
-    this.uniqueName = uniqueName
+    this.name = name
+    options.set(this.name, this)
 
     this.action = action
     this.weight = 1
@@ -19,12 +21,23 @@ export default class Option {
   get action() { return this._action }
   set action(v) { this._action = v }
 
+  /**
+   * Adds new consideration to this option
+   * 
+   * @param {Consideration|string} consideration unique name or reference to Consideration
+   * @memberof Option
+   */
   addConsideration(consideration) {
-    // TODO: add consideration by their uniqueName
-    if (this.considerations.has(consideration.uniqueName)) {
-      throw `This option already has '${consideration.uniqueName}' consideration`
+    if(typeof consideration === 'string'){
+      consideration = Consideration.get(consideration)
     }
-    this.considerations.set(consideration.uniqueName, consideration)
+    if(!consideration){
+      throw `You probably didn't specify a consideration: ${consideration}`
+    }
+    if (this.considerations.has(consideration.name)) {
+      throw `This option already has '${consideration.name}' consideration`
+    }
+    this.considerations.set(consideration.name, consideration)
   }
 
   /**
