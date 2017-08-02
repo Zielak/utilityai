@@ -1,4 +1,5 @@
 import Maths from '../maths'
+import Utility from './utility'
 
 const considerations = new Map()
 
@@ -13,7 +14,6 @@ export default class Consideration {
     considerations.set(this.name, this)
     
     this.weight = weight
-    this.utility
     // TODO: did I miss something?
   }
 
@@ -22,6 +22,16 @@ export default class Consideration {
   }
   set weight(v){
     Maths.clamp(v, 0, 1)
+  }
+
+  /**
+   * Sets an utility to this consideration
+   * 
+   * @param {any} value 
+   * @memberof Consideration
+   */
+  setUtility(value){
+    this.utility = new Utility(value, this.weight)
   }
 
   consider(context){ }

@@ -8,7 +8,7 @@ import Maths from '../maths'
  */
 export default class Utility {
 
-  constructor({value, weight = 1}) {
+  constructor(value, weight = 1) {
     this.value = value
     this.weight = weight
   }
