@@ -17,7 +17,7 @@ export default class Bladder extends ai.Consideration {
    * @memberof Bladder
    */
   consider(context){
-    this.setUtility(this.evaluator.evaluate( context.bladder))
+    this.setUtility(this.evaluator.evaluate(context.bladder))
   }
 
 }
