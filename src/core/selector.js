@@ -10,10 +10,14 @@ export default class Selector {
    */
   select(utilities){
     // Fail when there's no utilities
-    if(utilities.size === 0) return null
+    if(utilities.size === 0) {
+      this.selected = null
+    }
     
     // Pick first if it has only one utiliy
-    if(utilities.size === 1) return utilities.keys[0]
+    if(utilities.size === 1) {
+      this.selected = utilities.keys[0]
+    }
   }
 
 }

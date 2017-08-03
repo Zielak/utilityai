@@ -7,20 +7,21 @@ import Selector from '../core/selector'
  * @param {Map<Utilitiy>} utilities 
  * @returns {string} name of the best choice
  */
-export default class MaxUtilitySelector extends Selector{
+export default class MaxUtilitySelector extends Selector {
 
-  select(utilities){
+  select(utilities) {
     super.select(utilities)
     let maxUtil = 0
-    let selected = null
 
-    utilities.forEach((utility, key) => {
-      if(utility.combined > maxUtil){
-        maxUtil = utility.combined
-        selected = key
-      }
-    })
+    if (this.selected === undefined) {
+      utilities.forEach((utility, key) => {
+        if (utility.combined > maxUtil) {
+          maxUtil = utility.combined
+          this.selected = key
+        }
+      })
+    }
 
-    return selected
+    return this.selected
   }
 }
