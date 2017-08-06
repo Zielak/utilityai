@@ -34,6 +34,12 @@ export default class Consideration {
     this.utility = new Utility(value, this.weight)
   }
 
+  /**
+   * Override this.
+   * 
+   * @param {any} context 
+   * @memberof Consideration
+   */
   consider(context){ }
 
   // STATIC

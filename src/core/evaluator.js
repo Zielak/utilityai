@@ -1,9 +1,12 @@
+import Utility from './utility'
 
 export default class Evaluator {
 
   /**
    * Creates an instance of Evaluator.
    * It's a math function which will return Y value when given X.
+   * Used in Considerations.
+   * 
    * @param {number} params.xa
    * @param {number} params.xb
    * @param {number} params.ya
@@ -26,11 +29,11 @@ export default class Evaluator {
    * Override this. Returns the value for specified X
    * 
    * @param {number} x 
-   * @returns 
+   * @returns {Utility}
    * @memberof Evaluator
    */
   evaluate(x){
-    return 0
+    return new Utility(0, 0)
   }
 
 }

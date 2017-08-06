@@ -1,4 +1,5 @@
 import Evaluator from '../core/evaluator'
+import Utility from '../core/utility'
 import Maths from '../maths'
 
 export default class LineEvaluator extends Evaluator {
@@ -19,7 +20,7 @@ export default class LineEvaluator extends Evaluator {
   }
 
   evaluate(x){
-    return Maths.clamp(this.ya + this._dyOverDx * (x - this.xa))
+    return new Utility(Maths.clamp(this.ya + this._dyOverDx * (x - this.xa)))
   }
 
 }

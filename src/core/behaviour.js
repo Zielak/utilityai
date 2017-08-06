@@ -2,14 +2,17 @@ import Option from './option'
 import MaxUtilitySelector from '../selectors/maxUtilitySelector'
 import Selector from './selector'
 
+const behaviours = new Map()
+
 export default class Behaviour {
   
   constructor({name, selector, options = null}){
-    if(options.has(name)){
+    if(behaviours.has(name)){
       throw `Behaviour called '${name} already exists`
     }
 
     this.name = name
+    behaviours.set(this.name, this)
 
     this._selector = selector || new MaxUtilitySelector()
 
@@ -29,7 +32,7 @@ export default class Behaviour {
     if(!option){
       throw `You probably didn't specify an option: ${option}`
     }
-    if(this.considerations.has(option.name)){
+    if(this.options.has(option.name)){
       throw `This behaviour already has '${option.name}' option`
     }
     this.options.set(option.name, option)
@@ -59,6 +62,20 @@ export default class Behaviour {
     // Score those utilities using our selector
     const chosenOption = this.selector.select(utilities)
     return chosenOption.action
+  }
+
+  // STATIC
+
+  /**
+   * Get behavioour of a given name
+   * 
+   * @static
+   * @param {Behaviour} name 
+   * @returns 
+   * @memberof Behaviour
+   */
+  static get(name){
+    return behaviours.get(name)
   }
 
 }

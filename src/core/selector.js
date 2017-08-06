@@ -3,7 +3,7 @@ export default class Selector {
 
   /**
    * Override this and call `super.select(utilities)`.
-   * This function will
+   * This function will sanitize the results.
    * 
    * @param {Map<Utility>} utilities 
    * @memberof Selector
@@ -18,6 +18,8 @@ export default class Selector {
     if(utilities.size === 1) {
       this.selected = utilities.keys[0]
     }
+
+    // TODO: add typ checks here? or is that dev's problem?
   }
 
 }
