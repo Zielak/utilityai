@@ -1,12 +1,13 @@
 import Option from './option'
 import MaxUtilitySelector from '../selectors/maxUtilitySelector'
 import Selector from './selector'
+import Maths from '../maths'
 
 const behaviours = new Map()
 
 export default class Behaviour {
   
-  constructor({name, selector, options = null}){
+  constructor({name, selector, weight = 1, options = null}){
     if(behaviours.has(name)){
       throw `Behaviour called '${name} already exists`
     }
@@ -15,8 +16,23 @@ export default class Behaviour {
     behaviours.set(this.name, this)
 
     this._selector = selector || new MaxUtilitySelector()
+    this.weight = weight
 
     this.options = options || new Map()
+  }
+
+  get selector() {
+    return this._selector
+  }
+  set selector(v){
+    this._selector = v instanceof Selector ? v : this._selector
+  }
+  
+  get weight(){
+    return this._weight
+  }
+  set weight(v){
+    this._weight = Maths.clamp(v)
   }
 
   /**
@@ -37,12 +53,9 @@ export default class Behaviour {
     }
     this.options.set(option.name, option)
   }
-
-  get selector() {
-    return this._selector
-  }
-  set selector(v){
-    this._selector = v instanceof Selector ? v : this._selector
+  
+  consider() {
+    
   }
 
   /**

@@ -21,7 +21,7 @@ export default class Consideration {
     return this._weight
   }
   set weight(v){
-    Maths.clamp(v, 0, 1)
+    this._weight = Maths.clamp(v)
   }
 
   /**
@@ -37,7 +37,8 @@ export default class Consideration {
   /**
    * Override this.
    * 
-   * @param {any} context 
+   * @param {any} context
+   * @return {Utility}
    * @memberof Consideration
    */
   consider(context){ }

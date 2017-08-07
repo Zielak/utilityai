@@ -17,13 +17,6 @@ export default class Ai {
     this._behaviourUtilities = new Map()
 
     this._selector = selector || new MaxUtilitySelector()
-    
-    // TODO: Typed map? add only behaviours here.
-    // this.behaviours = new Map()
-    // this.options = new Map()
-    // this.considerations = new Map()
-    // this.actions = new Map()
-
   }
 
   get selector(){
@@ -32,6 +25,18 @@ export default class Ai {
   set selector(v){
     if(v instanceof Selector){
       this._.selector = v
+    }
+  }
+  
+  
+  select(context) {
+    if (this._behaviours.size === 0) {
+      return null
+    } else if (this._behaviours.size === 1) {
+      return this._behaviours[0].select(context)
+    } else {
+      this.updateUtilities(context)
+      return this.selectAction(context)
     }
   }
 
@@ -80,8 +85,9 @@ export default class Ai {
   }
 
   updateUtilities(context){
-    this._behaviours.forEach(behaviour => {
+    this._behaviours.forEach((behaviour, key) => {
       behaviour.consider(context)
+      this._behaviourUtilities.set(key, behaviour.utility)
     })
   }
 
